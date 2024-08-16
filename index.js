@@ -23,6 +23,10 @@ app.get("/", (req, res) => {
 });
 
 // Start the server on port 9001
-server.listen(9001, () =>
-  console.log("Server is running on port 9001")
-);
+server.listen(9001, (err) => {
+  if (!err) {
+    console.log("Server is running on port 9001");
+  } else {
+    console.log(err);
+  }
+});
