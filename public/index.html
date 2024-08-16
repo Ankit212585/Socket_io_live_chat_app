@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panwar Jii Chat App😎😎</title>
+    <style>
+        #sendbtn {
+            padding: 5px 20px;
+            border-radius: 10px;
+            background: blue;
+            color: white;
+
+        }
+
+        #message {
+            padding: 5px 10px;
+            border-radius: 10px;
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+    <h1>Panwar Jii Chat App😎😎</h1>
+    <input type="text" id="message" placeholder="Enter your text" />
+    <button id="sendbtn">Send</button>
+
+    <div id="messages"></div> <!-- Added this to display messages -->
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        const socket = io();
+        const sendbtn = document.getElementById("sendbtn");
+        const message = document.getElementById("message");
+        const messagesDiv = document.getElementById("messages");
+
+        socket.on("message", (message) => {
+            const p = document.createElement("p");
+            p.innerText = message;
+            messagesDiv.appendChild(p);
+        });
+
+        sendbtn.addEventListener("click", () => {
+            const messageText = message.value;
+            socket.emit("user-message", messageText);
+            message.value = ""; // Clear input after sending
+        });
+    </script>
+</body>
+
+</html>
